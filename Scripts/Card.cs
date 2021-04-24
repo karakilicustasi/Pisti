@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Card
 {
-    private int type {get; set;};
-    private int value {get; set;};
+    private int type {get; set;}
+    private int value {get; set;}
 
     public Card(){
 
