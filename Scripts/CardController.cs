@@ -7,11 +7,11 @@ public class CardController : MonoBehaviour
 {
     Card card;
     private CardDatabase cd;
-    private Texture cardImage;
+    
     void Start()
     {
         cd = new CardDatabase();
-        
+
     }
 
     // Update is called once per frame

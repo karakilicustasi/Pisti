@@ -16,7 +16,7 @@ public class Deck
     }
 
     // Update is called once per frame
-    private void FillDeck(){//fill the deck lisst 
+    private void FillDeck(){//fill the deck lisst //and get card textures from card database
         for(int i = 0; i<4;i++){
             for(int j = 0; j<13;j++){
                 deck.Add(new Card(i,j));
