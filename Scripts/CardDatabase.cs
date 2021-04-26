@@ -4,39 +4,47 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CardDatabase{
-    private Image clubImage;
-    private Image heartImage;
-    private Image spadeImage;
-    private Image diamondImage;
-    private Image jackClub;
-    private Image jackSpade;
-    private Image jackHeart;
-    private Image jackDiamond;
-    private Image queenClub;
-    private Image queenSpade;
-    private Image queenHeart;
-    private Image queenDiamond;
-    private Image kingClub;
-    private Image kingSpade;
-    private Image kingHeart;
-    private Image kingDiamond;
+    private Texture [] suits;
+    private Texture [] jackSuits;
+    private Texture [] queenSuits;
+    private Texture [] kingSuits;
+    Texture[] textures;
+    
     public CardDatabase(){
-        clubImage = Resources.Load<Sprite>("cards/club");
-        heartImage = Resources.Load<Sprite>("cards/heart");
-        spadeImage = Resources.Load<Sprite>("cards/spade");
-        diamondImage = Resources.Load<Sprite>("cards/diamond");
+        suits = new Texture[4];
+        jackSuits = new Texture[4];
+        queenSuits = new Texture[4];
+        kingSuits = new Texture[4];
+        importTextures();
+        fillSuits();
         Debug.Log("Database has been initialized");        
     }
-    public Image getClubImage(){
-        return clubImage;
+    private void importTextures(){
+        textures = Resources.LoadAll<Texture>("cards");
     }
-    public Image getHeartImage(){
-        return heartImage;
+    private void fillSuits(){
+        int i = 0;
+        while(i<4){
+            suits[i]=textures[i];
+            jackSuits[i]=textures[i+4];
+            queenSuits[i]=textures[i+8];
+            kingSuits[i]=textures[i+12];
+            i++;
+        }
     }
-    public Image getDiamondImage(){
-        return diamondImage;
+    public Texture returnTexture(int suitIndex,int value){
+        if(value == 11){
+            return jackSuits[suitIndex];
+        }
+        else if(value==12){
+            return queenSuits[suitIndex];
+        }
+        else if(value==13){
+            return kingSuits[suitIndex];
+        }
+        else{
+            return suits[suitIndex];
+        }
     }
-    public Image getSpadeImage(){
-        return spadeImage;
-    }
+
 }
