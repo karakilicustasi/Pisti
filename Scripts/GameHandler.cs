@@ -24,4 +24,7 @@ public class GameHandler : MonoBehaviour
     {
         
     }
+    void DealNewHand(int playerID){
+        
+    }
 }
