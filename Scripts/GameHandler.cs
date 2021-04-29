@@ -5,26 +5,42 @@ using UnityEngine;
 public class GameHandler : MonoBehaviour
 {
     private Deck deck;
-    [SerializeField]
-    private CardController[] playerHand = new CardController[4];//will be initialized in editor
-    [SerializeField]
-    private CardController[] enemyHand = new CardController[4];
     //deck
     //card array of card controllers for user and oppenent
     //instantiate those cards from the editor
     //try to manipulate them through this class 
     
+    [SerializeField]
+    HandController playerHand;
+    
+    [SerializeField]
+    HandController enemyHand;
+    
+    [SerializeField]
+    NeutralHandler neutral;
     void Start()
     {
         deck = new Deck();
+        DealHand(playerHand);
+        DealHand(enemyHand);
+        printDeckCount();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        //check if the hands are empty
+    }
+    public void DealHand(HandController hand){
+        Card[] cards;
+        deck.ShuffleDeck();//shuffle the deck before dealing
+        cards = deck.DealCards();//deal the cards
+        hand.AssignCards(cards);//assign the cards to hand
+    }
+    public void initializeNeutral(){
         
     }
-    void DealNewHand(int playerID){
-        
+    private void printDeckCount(){
+        Debug.Log(deck.getDeckCount());
     }
 }

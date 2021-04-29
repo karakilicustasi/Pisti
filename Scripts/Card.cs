@@ -7,13 +7,13 @@ public class Card
     
     private int type; //0- hearts 1-clubs 2- diamonds 3-spades
     private int value;//1-10 -> 11 - J 12 - Q 13 - K
-    private Texture cardImage;
+    private Sprite cardImage;
     private bool isCardPlayed;
-
     public Card(int type,int value){
         this.type = type;
         this.value = value;
-        isCardPlayed = false;
+        isCardPlayed = true;
+
     }
     public int getType(){
         return type;
@@ -21,14 +21,21 @@ public class Card
     public int getValue(){
         return value;
     }
-    public Texture getImage(){
+    public Sprite getImage(){
         return cardImage;
     }
-    public Played(){
+    public void setImage(Sprite suit){
+        cardImage = suit;
+    }
+    public void Played(){
         isCardPlayed = true;
     }
-    public Dealt(){
+    public void Dealt(){
         isCardPlayed = false;
     }
+    public bool isPlayed(){
+        return isCardPlayed;
+    }
+    
     
 }

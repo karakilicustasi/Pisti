@@ -45,4 +45,7 @@ public class Deck
         }
         return newHand;
     }
+    public int getDeckCount(){
+        return deck.Count;
+    }
 }

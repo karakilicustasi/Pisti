@@ -33,13 +33,13 @@ public class CardDatabase{
         }
     }
     public Sprite returnSprite(int suitIndex,int value){
-        if(value == 11){
+        if(value == 10){
             return jackSuits[suitIndex];
         }
-        else if(value == 12){
+        else if(value == 11){
             return queenSuits[suitIndex];
         }
-        else if(value == 13){
+        else if(value == 12){
             return kingSuits[suitIndex];
         }
         else{
