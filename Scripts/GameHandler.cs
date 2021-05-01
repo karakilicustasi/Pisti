@@ -17,10 +17,11 @@ public class GameHandler : MonoBehaviour
     HandController enemyHand;
     
     [SerializeField]
-    NeutralHandler neutral;
+    HandController neutral;
     void Start()
     {
         deck = new Deck();
+        DealHand(neutral);
         DealHand(playerHand);
         DealHand(enemyHand);
         printDeckCount();
