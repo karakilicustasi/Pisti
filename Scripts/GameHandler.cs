@@ -30,7 +30,9 @@ public class GameHandler : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //check if the hands are empty
+        //check if game is over
+        //check if hands are empty
+        //check if a card is double clicked
     }
     public void DealHand(HandController hand){
         Card[] cards;
