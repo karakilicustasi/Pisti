@@ -274,6 +274,7 @@ MonoBehaviour:
   playerHand: {fileID: 1158712868}
   enemyHand: {fileID: 28458298}
   neutral: {fileID: 526282506}
+  drop: {fileID: 14489536}
 --- !u!4 &74855003
 Transform:
   m_ObjectHideFlags: 0
@@ -325,7 +326,7 @@ PrefabInstance:
     - target: {fileID: 4878813743380043326, guid: 56f2abae4b31674c2b1e862ea011828d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4878813744107984241, guid: 56f2abae4b31674c2b1e862ea011828d,
         type: 3}
@@ -456,6 +457,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Neutral4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5594516211543070500, guid: 56f2abae4b31674c2b1e862ea011828d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8031035201534923520, guid: 56f2abae4b31674c2b1e862ea011828d,
         type: 3}
@@ -1188,10 +1194,30 @@ PrefabInstance:
       propertyPath: playable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2753427116505696307, guid: b5caede4fd1265bea8892238f33ff3eb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2753427116716759604, guid: b5caede4fd1265bea8892238f33ff3eb,
         type: 3}
       propertyPath: m_Name
       value: UserHand
+      objectReference: {fileID: 0}
+    - target: {fileID: 2765437220515357520, guid: b5caede4fd1265bea8892238f33ff3eb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2765437220730000944, guid: b5caede4fd1265bea8892238f33ff3eb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2765437221956471224, guid: b5caede4fd1265bea8892238f33ff3eb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5295607711081978570, guid: b5caede4fd1265bea8892238f33ff3eb, type: 3}
@@ -1229,6 +1255,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemyCard1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4878813743380043326, guid: 56f2abae4b31674c2b1e862ea011828d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4878813744107984241, guid: 56f2abae4b31674c2b1e862ea011828d,
         type: 3}
@@ -1345,6 +1376,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyCard3
       objectReference: {fileID: 0}
+    - target: {fileID: 5329440409784545454, guid: 56f2abae4b31674c2b1e862ea011828d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5594516211543070499, guid: 56f2abae4b31674c2b1e862ea011828d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1354,6 +1390,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemyCard4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5594516211543070500, guid: 56f2abae4b31674c2b1e862ea011828d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7016110568874131182, guid: 56f2abae4b31674c2b1e862ea011828d,
         type: 3}
@@ -1369,6 +1410,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemyCard2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031035201534923520, guid: 56f2abae4b31674c2b1e862ea011828d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8031035201534923527, guid: 56f2abae4b31674c2b1e862ea011828d,
         type: 3}

@@ -16,8 +16,7 @@ public class CardDatabase{
         queenSuits = new Sprite[4];
         kingSuits = new Sprite[4];
         importSprites();
-        fillSuits();
-        Debug.Log("Database has been initialized");        
+        fillSuits();    
     }
     private void importSprites(){
         Sprites = Resources.LoadAll<Sprite>("cards");

@@ -12,7 +12,7 @@ public class Deck
     {
         deck = new List<Card>();
         FillDeck();
-        Debug.Log("Deck has been initialized");
+        ShuffleDeck();
     }
 
     // Update is called once per frame
@@ -24,7 +24,6 @@ public class Deck
         }
     }
     public void ShuffleDeck(){
-        
         int size = deck.Count;
         while(size>1){
             size--;
@@ -35,13 +34,14 @@ public class Deck
 
         }
     }
-    public Card[] DealCards(){
+    public Card[] DealCards(string hand){
         Card[] newHand = new Card[4];
-        if(deck.Count>=4){
-            for(int i = 0; i<4;i++){
-                newHand[i] = deck[i];
-                deck.RemoveAt(i);
-            }
+        int size = deck.Count;
+        int j = 0;
+        for(int i = size-1; i>=size-4;i--){
+            newHand[j] = deck[i];
+            deck.RemoveAt(i);
+            j++;
         }
         return newHand;
     }
