@@ -69,12 +69,21 @@ public class HandController : MonoBehaviour
         this.points+=points;
     }
     public void AddAwardedCards(List<Card> awardedCards){
+        PistiDetection(awardedCards);//check for pisti
         for(int i = 0; i<awardedCards.Count;i++){
             cardsAtHand.Insert(0,awardedCards[i]);//cards are inserted to the begining of list
         }
     }
     public void ClearCardsAtHand(){
         cardsAtHand.Clear();
+    }
+    public void PistiDetection(List<Card> cards){
+        if(cards.Count==2){
+            IncreasePoint(10);
+        }
+    }
+    public int GetPoint(){
+        return points;
     }
 
 

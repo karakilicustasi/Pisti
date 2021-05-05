@@ -20,6 +20,8 @@ public class GameHandler : MonoBehaviour
     HandController neutral;
     [SerializeField]
     DropZone drop;
+
+    bool gameOver = false;
     
     void Start()
     {
@@ -27,7 +29,7 @@ public class GameHandler : MonoBehaviour
         DealHand(neutral,"neutral");
         DealHand(playerHand,"player");
         DealHand(enemyHand,"opponent");
-        printDeckCount();
+        PrintDeckCount();
     }
 
     // Update is called once per frame
@@ -49,8 +51,17 @@ public class GameHandler : MonoBehaviour
             }
             
         }
-        else{
-            Debug.Log("Game Over");
+        else{//game over
+            if(!gameOver){
+                AssignPoints(playerHand);
+                AssignPoints(enemyHand);
+
+                Debug.Log(playerHand.GetPoint());
+                Debug.Log(enemyHand.GetPoint());
+                gameOver = true;
+            }
+
+            
         }
         
         
@@ -63,8 +74,27 @@ public class GameHandler : MonoBehaviour
         cards = deck.DealCards(hand_);//deal the cards
         hand.AssignCards(cards);//assign the cards to hand
     }
-    private void printDeckCount(){
+    private void PrintDeckCount(){
         Debug.Log(deck.getDeckCount());
+    }
+    private void EndGameCalculation(){
+        
+    }
+    private void AssignPoints(HandController hand){
+        for(int i = 0; i<hand.getCardList().Count;i++){
+            if(hand.getCardList()[i].getValue()==0){
+                hand.IncreasePoint(1);
+            }
+            else if(hand.getCardList()[i].getValue()==1&&hand.getCardList()[i].getType()==3){//2 spades
+                hand.IncreasePoint(2);
+            }
+            else if(hand.getCardList()[i].getValue()==9&&hand.getCardList()[i].getType()==2){//10 diamond
+                hand.IncreasePoint(3);
+            }
+            else if(hand.getCardList()[i].getValue()==10){
+                hand.IncreasePoint(1);
+            }
+        }
     }
     private void ComputerMove(){
         List<CardController> computerCards = enemyHand.getHand();
@@ -72,7 +102,7 @@ public class GameHandler : MonoBehaviour
         bool found = false;
         int random = 0;
         
-        if(neutral.getHand()[0].gameObject.activeSelf){
+        if(neutral.getHand()[0].gameObject.activeSelf){//if there is a card in mid table
             for(int i = 0; i<computerCards.Count;i++){
                 if((computerCards[i].gameObject.activeSelf)&&(computerCards[i].getCard().getValue() == cardOnTable[0].getCard().getValue()||computerCards[i].getCard().getValue()==10)){
                     drop.ComputerDrop(enemyHand,computerCards[i]);
@@ -91,7 +121,7 @@ public class GameHandler : MonoBehaviour
                 }    
             }
         }
-        else{
+        else{//if there isnt a card on table
             for(int i = 0;i<computerCards.Count;i++){
                 if(computerCards[i].gameObject.activeSelf){
                     drop.ComputerDrop(enemyHand,computerCards[i]);
