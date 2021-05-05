@@ -45,6 +45,7 @@ public class GameHandler : MonoBehaviour
             else{//computer turn
                 Debug.Log("Opponent");
                 ComputerMove();
+                
             }
             
         }
@@ -66,22 +67,37 @@ public class GameHandler : MonoBehaviour
         Debug.Log(deck.getDeckCount());
     }
     private void ComputerMove(){
-        List<CardController> computerCards = enemyHand.getCardList();
-        List<CardController> cardOnTable = neutral.getCardList();
+        List<CardController> computerCards = enemyHand.getHand();
+        List<CardController> cardOnTable = neutral.getHand();
         bool found = false;
         int random = 0;
-        for(int i = 0;i<computerCards.Count;i++){
-            if(computerCards[i].getCard().getValue() == cardOnTable[0].getCard().getValue()&&computerCards[i].gameObject.activeSelf){
-                drop.ComputerDrop(enemyHand,computerCards[i]);
-                found = true;
-                break;
+        
+        if(neutral.getHand()[0].gameObject.activeSelf){
+            for(int i = 0; i<computerCards.Count;i++){
+                if((computerCards[i].gameObject.activeSelf)&&(computerCards[i].getCard().getValue() == cardOnTable[0].getCard().getValue()||computerCards[i].getCard().getValue()==10)){
+                    drop.ComputerDrop(enemyHand,computerCards[i]);
+                    enemyHand.AddAwardedCards(neutral.getCardList());
+                    neutral.ClearCardsAtHand();
+                    cardOnTable[0].gameObject.SetActive(false);
+                    found = true;
+                    break;
+                }
             }
-        }        
-        if(found == false){
-            random = Random.Range(0,4);
-            if(computerCards[random].gameObject.activeSelf){
-                drop.ComputerDrop(enemyHand,computerCards[random]);
-                found = true;
+            if(!found){
+                random = Random.Range(0,4);
+                if(computerCards[random].gameObject.activeSelf){
+                    drop.ComputerDrop(enemyHand,computerCards[random]);
+                    //found = true;
+                }    
+            }
+        }
+        else{
+            for(int i = 0;i<computerCards.Count;i++){
+                if(computerCards[i].gameObject.activeSelf){
+                    drop.ComputerDrop(enemyHand,computerCards[i]);
+                    neutral.getHand()[0].gameObject.SetActive(true);
+                    break;
+                }
             }
         }
     }

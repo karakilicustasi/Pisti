@@ -6,9 +6,11 @@ public class HandController : MonoBehaviour
 {
     [SerializeField]
     private List<CardController> hand = new List<CardController>();//will be initialized in editor
-    private List<Card> cardsAtHand = new List<Card>();
+    private List<Card> cardsAtHand = new List<Card>(); // recently assigned cards are at last index, and the cards awarded from game loop are at the first index. 
+                                                       // so, when the game is over, only the awarded cards will be stored in array
     bool cardAssigned = false;
     bool cardDroppedFromHand = false;
+    private int points = 0;
 
     public int CardsAtHandCount(){
         return cardsAtHand.Count;
@@ -38,6 +40,9 @@ public class HandController : MonoBehaviour
         if(cardAssigned){
             int j = cardsAtHand.Count-1;
             for(int i = hand.Count-1; i>=0; i--){
+                if(j<0){
+                    break;
+                }
                 hand[i].setCard(cardsAtHand[j]);
                 hand[i].gameObject.SetActive(true);
                 j--;
@@ -53,10 +58,24 @@ public class HandController : MonoBehaviour
             Debug.Log(cardsAtHand[i].getValue());
         }
     }
-    public List<CardController> getCardList(){
+    public List<CardController> getHand(){
         return hand;
     }
+    public List<Card> getCardList(){
+        return cardsAtHand;
+    }
 
+    public void IncreasePoint(int points){
+        this.points+=points;
+    }
+    public void AddAwardedCards(List<Card> awardedCards){
+        for(int i = 0; i<awardedCards.Count;i++){
+            cardsAtHand.Insert(0,awardedCards[i]);//cards are inserted to the begining of list
+        }
+    }
+    public void ClearCardsAtHand(){
+        cardsAtHand.Clear();
+    }
 
 
 }

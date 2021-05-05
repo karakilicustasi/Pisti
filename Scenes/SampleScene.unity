@@ -198,6 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Neutral: {fileID: 526282506}
+  Player: {fileID: 1158712868}
 --- !u!50 &14489537
 Rigidbody2D:
   serializedVersion: 4
@@ -326,7 +327,7 @@ PrefabInstance:
     - target: {fileID: 4878813743380043326, guid: 56f2abae4b31674c2b1e862ea011828d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4878813744107984241, guid: 56f2abae4b31674c2b1e862ea011828d,
         type: 3}
@@ -461,7 +462,7 @@ PrefabInstance:
     - target: {fileID: 5594516211543070500, guid: 56f2abae4b31674c2b1e862ea011828d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8031035201534923520, guid: 56f2abae4b31674c2b1e862ea011828d,
         type: 3}

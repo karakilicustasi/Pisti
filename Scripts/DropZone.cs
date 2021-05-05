@@ -6,6 +6,8 @@ public class DropZone : MonoBehaviour
 {
     [SerializeField] 
     private HandController Neutral;
+    [SerializeField]
+    private HandController Player;
     private GameObject collidedObject;
     private CardController collidedCard;
     private bool cardEntered;
@@ -29,6 +31,22 @@ public class DropZone : MonoBehaviour
         if(collidedCard.isPlayable()&&collidedCard.isDropped()&&collidedCard.isInRange()){
             collidedObject.transform.parent.gameObject.GetComponent<HandController>().RemoveCard(collidedCard.getCard());//remove the card from user hand
             Neutral.cardDropped(collidedCard);
+            if(Neutral.getHand()[0].gameObject.activeSelf){
+                if(collidedCard.getCard().getValue()==Neutral.getHand()[0].getCard().getValue()||collidedCard.getCard().getValue()==10){
+                    
+                    Player.AddAwardedCards(Neutral.getCardList());
+                    Neutral.ClearCardsAtHand();
+                    Neutral.getHand()[0].gameObject.SetActive(false);
+                }
+                else{
+                    //Neutral.cardDropped(collidedCard);
+                }
+            }
+            else{//if the drop zone empty
+                //Neutral.cardDropped(collidedCard);
+                Neutral.getHand()[0].gameObject.SetActive(true);
+
+            }
             collidedCard.setInRange(false);
             collidedObject.SetActive(false);
             turn++;
