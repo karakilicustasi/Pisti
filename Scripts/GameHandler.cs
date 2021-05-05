@@ -5,30 +5,27 @@ using UnityEngine;
 public class GameHandler : MonoBehaviour
 {
     private Deck deck;
-    //deck
-    //card array of card controllers for user and oppenent
-    //instantiate those cards from the editor
-    //try to manipulate them through this class 
-    
-    [SerializeField]
-    HandController playerHand;
-    
-    [SerializeField]
-    HandController enemyHand;
-    
-    [SerializeField]
-    HandController neutral;
-    [SerializeField]
-    DropZone drop;
 
-    bool gameOver = false;
+    
+    [SerializeField]
+    HandController playerHand; //hand controller for player
+    
+    [SerializeField]
+    HandController opponentHand; //hand controller for opponent
+    
+    [SerializeField]
+    HandController neutral; //drop area
+    [SerializeField]
+    DropZone drop; //drop functions and collider controls
+
+    bool gameOver = false;//sets true when game is over
     
     void Start()
     {
-        deck = new Deck();
-        DealHand(neutral,"neutral");
+        deck = new Deck();//initialize the deck
+        DealHand(neutral,"neutral");//deal hands
         DealHand(playerHand,"player");
-        DealHand(enemyHand,"opponent");
+        DealHand(opponentHand,"opponent");
         PrintDeckCount();
     }
 
@@ -37,12 +34,12 @@ public class GameHandler : MonoBehaviour
     {
 
         if(drop.getTurn()<48){//if its the first turn or if its the end of the first session
-            if(enemyHand.isEmpty()&&playerHand.isEmpty()){
+            if(opponentHand.isEmpty()&&playerHand.isEmpty()){
                 DealHand(playerHand, "player");
-                DealHand(enemyHand, "opponent");
+                DealHand(opponentHand, "opponent");
             }
             if(drop.getTurn()%2==0){//player turn
-
+                
             }
             else{//computer turn
                 Debug.Log("Opponent");
@@ -53,24 +50,14 @@ public class GameHandler : MonoBehaviour
         }
         else{//game over
             if(!gameOver){
-                AssignPoints(playerHand);
-                AssignPoints(enemyHand);
-
-                Debug.Log(playerHand.GetPoint());
-                Debug.Log(enemyHand.GetPoint());
+                AssignPoints(playerHand);//assign the points
+                AssignPoints(opponentHand);
                 gameOver = true;
             }
-
-            
         }
-        
-        
-        //check if hands are empty
-        //check if a card is double clicked
     }
     public void DealHand(HandController hand,string hand_){
         Card[] cards;
-        //deck.ShuffleDeck();//shuffle the deck before dealing
         cards = deck.DealCards(hand_);//deal the cards
         hand.AssignCards(cards);//assign the cards to hand
     }
@@ -97,7 +84,7 @@ public class GameHandler : MonoBehaviour
         }
     }
     private void ComputerMove(){
-        List<CardController> computerCards = enemyHand.getHand();
+        List<CardController> computerCards = opponentHand.getHand();
         List<CardController> cardOnTable = neutral.getHand();
         bool found = false;
         int random = 0;
@@ -105,18 +92,18 @@ public class GameHandler : MonoBehaviour
         if(neutral.getHand()[0].gameObject.activeSelf){//if there is a card in mid table
             for(int i = 0; i<computerCards.Count;i++){
                 if((computerCards[i].gameObject.activeSelf)&&(computerCards[i].getCard().getValue() == cardOnTable[0].getCard().getValue()||computerCards[i].getCard().getValue()==10)){
-                    drop.ComputerDrop(enemyHand,computerCards[i]);
-                    enemyHand.AddAwardedCards(neutral.getCardList());
+                    drop.ComputerDrop(opponentHand,computerCards[i]);
+                    opponentHand.AddAwardedCards(neutral.getCardList());
                     neutral.ClearCardsAtHand();
                     cardOnTable[0].gameObject.SetActive(false);
                     found = true;
                     break;
                 }
             }
-            if(!found){
+            if(!found){//if there is not an identical card on table, put a card down randomly
                 random = Random.Range(0,4);
                 if(computerCards[random].gameObject.activeSelf){
-                    drop.ComputerDrop(enemyHand,computerCards[random]);
+                    drop.ComputerDrop(opponentHand,computerCards[random]);
                     //found = true;
                 }    
             }
@@ -124,7 +111,7 @@ public class GameHandler : MonoBehaviour
         else{//if there isnt a card on table
             for(int i = 0;i<computerCards.Count;i++){
                 if(computerCards[i].gameObject.activeSelf){
-                    drop.ComputerDrop(enemyHand,computerCards[i]);
+                    drop.ComputerDrop(opponentHand,computerCards[i]);
                     neutral.getHand()[0].gameObject.SetActive(true);
                     break;
                 }

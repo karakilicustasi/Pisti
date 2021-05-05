@@ -18,20 +18,20 @@ public class DropZone : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {
-        collidedCard = collisionInfo.gameObject.GetComponent<CardController>();
-        collidedObject = collisionInfo.gameObject;
-        collidedCard.setInRange(true);
+        collidedObject = collisionInfo.gameObject;//
+        collidedCard = collidedObject.GetComponent<CardController>();// get card controller component from collided object
+        collidedCard.setInRange(true);//the card is in the range of neutral cards collider
     }
-    void OnCollisionExit2D(Collision2D other) {
-        collidedCard = other.gameObject.GetComponent<CardController>();
-        collidedCard.setInRange(false);
+    void OnCollisionExit2D(Collision2D other) {//if the card is out of the range
+        collidedCard = other.gameObject.GetComponent<CardController>();//get the collided card controller component
+        collidedCard.setInRange(false);//its out of the range of neutral collider
     }
     void Update()
     {
-        if(collidedCard.isPlayable()&&collidedCard.isDropped()&&collidedCard.isInRange()){
+        if(collidedCard.isPlayable()&&collidedCard.isDropped()&&collidedCard.isInRange()){//if a card is playable and in the rage of collision
             collidedObject.transform.parent.gameObject.GetComponent<HandController>().RemoveCard(collidedCard.getCard());//remove the card from user hand
-            Neutral.cardDropped(collidedCard);
-            if(Neutral.getHand()[0].gameObject.activeSelf){
+            Neutral.cardDropped(collidedCard);//drop the card on table
+            if(Neutral.getHand()[0].gameObject.activeSelf){//if there is an active card on table
                 if(collidedCard.getCard().getValue()==Neutral.getHand()[0].getCard().getValue()||collidedCard.getCard().getValue()==10){
                     
                     Player.AddAwardedCards(Neutral.getCardList());

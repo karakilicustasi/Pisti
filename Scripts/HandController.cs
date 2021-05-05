@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HandController : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class HandController : MonoBehaviour
     bool cardAssigned = false;
     bool cardDroppedFromHand = false;
     private int points = 0;
+
+    [SerializeField] 
+    private Text scoreText;
 
     public int CardsAtHandCount(){
         return cardsAtHand.Count;
@@ -67,6 +71,7 @@ public class HandController : MonoBehaviour
 
     public void IncreasePoint(int points){
         this.points+=points;
+        scoreText.text = "Score: " + this.points.ToString();
     }
     public void AddAwardedCards(List<Card> awardedCards){
         PistiDetection(awardedCards);//check for pisti
